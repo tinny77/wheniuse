@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+// Configuration
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+$body-bg: #17140e;
+$body-color: #f2e8d5;
+$font-size-base: 14px;
+$lead-font-size: $font-size-base * 1.2;
+$font-family-base: 'Open Sans', Helvetica, Arial, sans-serif;
+$primary: #d4943a;
+$success: #69b34c;
+$warning: #acb334;
+$info: #fab733;
+$secondary: #ff8e15;
+$danger: #ff0d0d;
+$theme-colors: (
+	'primary': $primary,
+	'secondary': $secondary,
+	'success': $success,
+	'info': $info,
+	'warning': $warning,
+	'danger': $danger,
+	'light': $light,
+	'dark': $dark,
+);
+$link-color: $primary;
+$progress-height: 4px;
+$progress-border-radius: 0;
+$progress-bg: $gray-600;
+$input-bg: $gray-900;
+$input-color: #fff;
+$input-focus-bg: $gray-800;
+$input-border-radius: 0;
+$input-border-width: 0;
+$input-border-color: $gray-600;
+$input-font-size: 1.35rem;
+$input-font-weight: 500;
+$input-focus-color: #fff;
+$input-focus-border-color: rgba(255, 255, 255, 0);
+$input-btn-focus-box-shadow: 0;
+
+@import '~bootstrap/scss/maps';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+
+// Layout & components
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/containers';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/tables';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/dropdown';
+@import '~bootstrap/scss/button-group';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/card';
+@import '~bootstrap/scss/accordion';
+@import '~bootstrap/scss/breadcrumb';
+@import '~bootstrap/scss/pagination';
+@import '~bootstrap/scss/badge';
+@import '~bootstrap/scss/alert';
+@import '~bootstrap/scss/progress';
+@import '~bootstrap/scss/list-group';
+@import '~bootstrap/scss/close';
+@import '~bootstrap/scss/toasts';
+@import '~bootstrap/scss/modal';
+@import '~bootstrap/scss/tooltip';
+@import '~bootstrap/scss/popover';
+@import '~bootstrap/scss/carousel';
+@import '~bootstrap/scss/spinners';
+@import '~bootstrap/scss/offcanvas';
+@import '~bootstrap/scss/placeholders';
+
+// Helpers
+@import '~bootstrap/scss/helpers';
+
+// Utilities
+@import '~bootstrap/scss/utilities/api';
+
+.form-control {
+	border: 0;
+
+	&:focus,
+	&:active {
+		box-shadow: none;
+	}
+
+	&:disabled {
+		background: $gray-900;
+		border: 0;
+	}
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.badge {
+		background-color: $gray-800;
+		font-weight: 600;
+		font-size: 12px;
+	}
+}
