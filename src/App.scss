@@ -40,6 +40,9 @@ $input-font-weight: 500;
 $input-focus-color: #fff;
 $input-focus-border-color: rgba(255, 255, 255, 0);
 $input-btn-focus-box-shadow: 0;
+$modal-content-bg: $gray-800;
+$modal-header-border-width: 0;
+$modal-footer-border-width: 0;
 
 @import '~bootstrap/scss/maps';
 @import '~bootstrap/scss/mixins';
@@ -98,14 +101,24 @@ $input-btn-focus-box-shadow: 0;
 	}
 }
 
-.title {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.feature-container {
+	.title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 
-	.badge {
+		.badge {
+			background-color: $gray-800;
+			font-weight: 600;
+			font-size: 12px;
+		}
+	}
+
+	cursor: pointer;
+	background-color: $gray-900;
+
+	&:hover,
+	&:active {
 		background-color: $gray-800;
-		font-weight: 600;
-		font-size: 12px;
 	}
 }

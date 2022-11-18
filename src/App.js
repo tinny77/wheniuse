@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Badge from 'react-bootstrap/Badge'
+import Modal from 'react-bootstrap/Modal'
 import Header from './Header'
 import Footer from './Footer'
 import './App.scss'
@@ -27,6 +28,10 @@ function App() {
 	const [checkedPop, setCheckedPop] = useState(false)
 	const [checkedUnpop, setCheckedUnpop] = useState(false)
 
+	const [show, setShow] = useState(false)
+	const handleClose = () => setShow(false)
+	const handleShow = () => setShow(true)
+
 	const [data, setData] = useState([])
 	const apiUrl_full =
 		'https://raw.githubusercontent.com/Fyrd/caniuse/main/fulldata-json/data-1.0.json'
@@ -36,6 +41,22 @@ function App() {
 	}
 	const handleChangePop = () => {
 		setCheckedPop(!checkedPop)
+	}
+
+	const FeatureModal = (props) => {
+		return (
+			<Modal show={show} onHide={handleClose} size="lg" centered>
+				<Modal.Header>
+					<Modal.Title>Modal heading {/* ModalKey */}</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+				<Modal.Footer>
+					<Button variant="primary" onClick={handleClose}>
+						Save Changes
+					</Button>
+				</Modal.Footer>
+			</Modal>
+		)
 	}
 
 	const getData = () => {
@@ -57,7 +78,7 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-
+			<FeatureModal />
 			<Container>
 				<Row className="p-3 pb-0 rounded-3 align-items-center">
 					{/* <span className="sr-only">Search here your property</span> */}
@@ -82,7 +103,7 @@ function App() {
 					<Col sm={10}>
 						<Form.Check
 							type="switch"
-							id="custom-switch"
+							id="custom-switch-unpop"
 							label="Hide less popular or discontinued features"
 							onChange={handleChangeUnpop}
 						/>
@@ -93,7 +114,7 @@ function App() {
 					<Col sm={10}>
 						<Form.Check
 							type="switch"
-							id="custom-switch"
+							id="custom-switch-pop"
 							label="Hide already affirmed features"
 							onChange={handleChangePop}
 						/>
@@ -125,7 +146,14 @@ function App() {
 					.filter((key) => data[key].usage_perc_y > (checkedUnpop ? 64.99 : 0))
 					.filter((key) => data[key].usage_perc_y < (checkedPop ? 95 : 100))
 					.map((key) => (
-						<Container className="p-3 bg-dark rounded-3 my-3" key={key}>
+						<Container
+							className="p-3 rounded-3 my-3 feature-container"
+							key={key}
+							//onClick={handleShow({ key }.toString())}
+							onClick={(e) => {
+								handleShow()
+							}}
+						>
 							<strong className="h5 mb-2 title">
 								{data[key].title}
 								<Badge pill bg="default">
@@ -139,7 +167,6 @@ function App() {
 						</Container>
 					))}
 			{data.isEmpty && <Container>No results</Container>}
-
 			<Footer />
 		</div>
 	)
