@@ -1,9 +1,9 @@
-import React from 'react'
-import Row from 'react-bootstrap/Row'
-import Container from 'react-bootstrap/Container'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
+import React from 'react';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 
 function Footer() {
 	return (
@@ -11,7 +11,7 @@ function Footer() {
 			<Container className="p-3">
 				<Row className="p-3 rounded-3 pt-4 text-center">
 					<small>
-						Based on and inspired by the awesome{' '}
+						Data from{' '}
 						<a href="https://caniuse.com/" target="_blank" rel="noreferrer">
 							Caniuse.com
 						</a>
@@ -21,7 +21,7 @@ function Footer() {
 				</Row>
 			</Container>
 		</footer>
-	)
+	);
 }
 
-export default Footer
+export default Footer;

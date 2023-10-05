@@ -1,53 +1,53 @@
 //import logo from './logo.svg'
-import { useState, useEffect } from 'react'
-import Row from 'react-bootstrap/Row'
-import Container from 'react-bootstrap/Container'
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import Spinner from 'react-bootstrap/Spinner'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Header from './Header'
-import Footer from './Footer'
-import './App.scss'
+import { useState, useEffect } from 'react';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Spinner from 'react-bootstrap/Spinner';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Header from './Header';
+import Footer from './Footer';
+import './App.scss';
 
 function App() {
 	const showProgress = function (val) {
-		let variantClass = 'danger'
-		if (val > 40) variantClass = 'secondary'
-		if (val > 60) variantClass = 'info'
-		if (val > 75) variantClass = 'warning'
-		if (val > 90) variantClass = 'success'
-		return <ProgressBar variant={variantClass} now={val} className="mt-3" />
-	}
+		let variantClass = 'danger';
+		if (val > 50) variantClass = 'secondary';
+		if (val > 65) variantClass = 'info';
+		if (val > 80) variantClass = 'warning';
+		if (val > 95) variantClass = 'success';
+		return <ProgressBar variant={variantClass} now={val} className="mt-3" />;
+	};
 
-	const [isLoaded, setIsLoaded] = useState(false)
-		const [searchText, setSearchText] = useState('')
-	const [checked, setChecked] = useState(false)
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [searchText, setSearchText] = useState('');
+	const [checked, setChecked] = useState(true);
 
-	const [data, setData] = useState([])
+	const [data, setData] = useState([]);
 	const apiUrl_full =
-		'https://raw.githubusercontent.com/Fyrd/caniuse/main/fulldata-json/data-1.0.json'
+		'https://raw.githubusercontent.com/Fyrd/caniuse/main/fulldata-json/data-1.0.json';
 
-     const handleChange = () => {
-		setChecked(!checked)
-	}
+	const handleChange = () => {
+		setChecked(!checked);
+	};
 
 	const getData = () => {
 		fetch(apiUrl_full)
 			.then(function (response) {
-				//console.log(response)
-				return response.json()
+				//console.log(response);
+				return response.json();
 			})
 			.then(function (myJson) {
-				setIsLoaded(true)
-				setData(myJson.data)
-			})
-	}
+				setIsLoaded(true);
+				setData(myJson.data);
+				//console.log(myJson.data['css-nesting']);
+			});
+	};
 
 	useEffect(() => {
-		getData()
-	}, [])
+		getData();
+	}, []);
 
 	return (
 		<div className="App">
@@ -55,7 +55,6 @@ function App() {
 
 			<Container>
 				<Row className="p-3 pb-0 rounded-3 align-items-center">
-					{/* <span className="sr-only">Search here your property</span> */}
 					<Form.Label column sm={2}>
 						<Form.Label htmlFor="searchInput" className="m-0">
 							Search:
@@ -78,8 +77,9 @@ function App() {
 						<Form.Check
 							type="switch"
 							id="custom-switch"
-							label="Hide low-popular (under 65%) features"
+							label="Include partially supported browsers"
 							onChange={handleChange}
+							defaultChecked
 						/>
 					</Col>
 				</Row>
@@ -94,32 +94,36 @@ function App() {
 					</Row>
 				</Container>
 			)}
-			{data && Object.keys(data)
-				.filter((key) =>
-					data[key].title.toLowerCase().includes(searchText.toLowerCase())
-				)
-				.filter((key) =>
-					data[key].usage_perc_y > (checked ? 65 : 0)
-				)
-				.map((key) => (
-					<Container className="p-3 bg-dark rounded-3 my-3" key={key}>
-						<strong className="h5 mb-2 d-block">{data[key].title}</strong>
-						{data[key].description}
-						<br />
-						{showProgress(data[key].usage_perc_y)}
-						<em className="small">{data[key].usage_perc_y}%</em>
-					</Container>
-				))
-			}
-			{
-				data.isEmpty && (
-				<Container>No reuslts</Container>
-				)
-			}
+			{data &&
+				Object.keys(data)
+					.filter((key) =>
+						data[key].title.toLowerCase().includes(searchText.toLowerCase())
+					)
+					//.filter((key) => perc > (checked ? 65 : 0))
+					.map((key) => (
+						<Container className="p-3 bg-dark rounded-3 my-3" key={key}>
+							<strong className="h5 mb-2 d-block">{data[key].title}</strong>
+							{data[key].description}
+							<br />
+							{showProgress(
+								checked
+									? data[key].usage_perc_y + data[key].usage_perc_a
+									: data[key].usage_perc_y
+							)}
+							<em className="small">
+								{(checked
+									? data[key].usage_perc_y + data[key].usage_perc_a
+									: data[key].usage_perc_y
+								).toFixed(0)}
+								%
+							</em>
+						</Container>
+					))}
+			{data.isEmpty && <Container>No results</Container>}
 
 			<Footer />
 		</div>
-	)
+	);
 }
 
-export default App
+export default App;
