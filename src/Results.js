@@ -3,6 +3,8 @@ import { DataContext } from './DataContext';
 import { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Stack from 'react-bootstrap/Stack';
+import Badge from 'react-bootstrap/Badge';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -35,13 +37,23 @@ function Results() {
 					No results
 				</Container>
 			)}
-			<Container>
-				<Row className="mx-3">
+			<Container className="pb-5">
+				<Row className="mx-3 pb-5">
 					{!!filteredData &&
 						filteredData.map((key) => (
 							<Container className="p-3 bg-dark rounded-3 my-3" key={key}>
 								<strong className="h5 mb-2 d-block feature-title">
-									{data[key].title}
+									<a href={data[key].spec} target="_blank" rel="noreferrer">
+										{data[key].title}
+									</a>
+
+									<Stack direction="horizontal" gap={2}>
+										{data[key].categories.map((cat) => (
+											<Badge bg="info" key={data[key].chrome_id + '_' + cat}>
+												{cat}
+											</Badge>
+										))}
+									</Stack>
 								</strong>
 								{data[key].description}
 								<br />

@@ -36,7 +36,6 @@ function SearchBar() {
 						id="custom-switch"
 						label="Include partially supported browsers"
 						onChange={handleChange}
-						defaultChecked
 					/>
 				</Col>
 			</Row>

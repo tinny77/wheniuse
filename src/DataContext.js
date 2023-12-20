@@ -17,15 +17,15 @@ export const DataProvider = ({ children }) => {
 			})
 			.then(function (json) {
 				setData(json.data);
-				filterData(json.data);
+				setfilteredData(Object.keys(json.data));
 				setIsLoaded(true);
-				//console.log(data['css-nesting']);
+				//console.log(json.data['css-nesting']);
 				//console.log(json.data);
 			});
 	};
 
 	const [searchText, setSearchText] = useState('');
-	const [checked, setChecked] = useState(true);
+	const [checked, setChecked] = useState(false);
 
 	const handleChange = () => {
 		setChecked((c) => !c);
@@ -33,12 +33,12 @@ export const DataProvider = ({ children }) => {
 
 	const handleSearch = (text) => {
 		setSearchText(text);
-		filterData(data);
+		filterData(text);
 	};
 
-	const filterData = (data) => {
+	const filterData = (text) => {
 		const filteredKeys = Object.keys(data).filter((key) =>
-			data[key].title.toLowerCase().includes(searchText.toLowerCase())
+			data[key].title.toLowerCase().includes(text.toLowerCase())
 		);
 		//const filteredItems = filteredKeys.map((key) => data[key]);
 		setfilteredData(filteredKeys);
