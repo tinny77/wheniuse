@@ -6,7 +6,7 @@ function Footer() {
 	return (
 		<footer>
 			<Container className="p-3">
-				<Row className="p-3 rounded-3 pt-4 text-center">
+				<Row className="p-2 text-center">
 					<small>
 						Data from{' '}
 						<a href="https://caniuse.com/" target="_blank" rel="noreferrer">

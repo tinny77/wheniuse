@@ -2,7 +2,6 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
-
 function Header() {
 	return (
 		<header>

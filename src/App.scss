@@ -4,26 +4,28 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
-$body-bg: #17140e;
+$body-bg: #101010;
 $body-color: #f2e8d5;
 $font-size-base: 14px;
 $lead-font-size: $font-size-base * 1.2;
-$font-family-base: 'Open Sans', Helvetica, Arial, sans-serif;
+$font-family-base: 'Open Sans',
+Helvetica,
+Arial,
+sans-serif;
 $primary: #d4943a;
 $success: #69b34c;
 $warning: #acb334;
 $info: #fab733;
 $secondary: #ff8e15;
 $danger: #ff0d0d;
-$theme-colors: (
-	'primary': $primary,
-	'secondary': $secondary,
-	'success': $success,
-	'info': $info,
-	'warning': $warning,
-	'danger': $danger,
-	'light': $light,
-	'dark': $dark,
+$theme-colors: ('primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'info': $info,
+    'warning': $warning,
+    'danger': $danger,
+    'light': $light,
+    'dark': $dark,
 );
 $link-color: $primary;
 $progress-height: 4px;
@@ -84,16 +86,34 @@ $input-btn-focus-box-shadow: 0;
 // Utilities
 @import '~bootstrap/scss/utilities/api';
 
+#root,
+.App {
+    min-height: 100svh;
+}
+
+.feature-title {
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
 .form-control {
-	border: 0;
+    border: 0;
 
-	&:focus,
-	&:active {
-		box-shadow: none;
-	}
+    &:focus,
+    &:active {
+        box-shadow: none;
+    }
 
-	&:disabled {
-		background: $gray-900;
-		border: 0;
-	}
+    &:disabled {
+        background: $gray-900;
+        border: 0;
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: $body-bg;
 }
