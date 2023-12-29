@@ -4,7 +4,7 @@ export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 	const API_URL =
-		'https://raw.githubusercontent.com/Fyrd/caniuse/main/fulldata-json/data-1.0.json';
+		'https://raw.githubusercontent.com/Fyrd/caniuse/main/fulldata-json/data-2.0.json';
 	const [data, setData] = useState([]);
 	const [filteredData, setfilteredData] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -37,8 +37,10 @@ export const DataProvider = ({ children }) => {
 	};
 
 	const filterData = (text) => {
-		const filteredKeys = Object.keys(data).filter((key) =>
-			data[key].title.toLowerCase().includes(text.toLowerCase())
+		const filteredKeys = Object.keys(data).filter(
+			(key) =>
+				data[key].title.toLowerCase().includes(text.toLowerCase()) ||
+				data[key].keywords.toLowerCase().includes(text.toLowerCase())
 		);
 		//const filteredItems = filteredKeys.map((key) => data[key]);
 		setfilteredData(filteredKeys);

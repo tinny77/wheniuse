@@ -40,37 +40,45 @@ function Results() {
 			<Container className="pb-5">
 				<Row className="mx-3 pb-5">
 					{!!filteredData &&
-						filteredData.map((key) => (
-							<Container className="p-3 bg-dark rounded-3 my-3" key={key}>
-								<strong className="h5 mb-2 d-block feature-title">
-									<a href={data[key].spec} target="_blank" rel="noreferrer">
-										{data[key].title}
-									</a>
+						filteredData
+							.filter((key) => data[key].chrome_id)
+							.map((key) => (
+								<Container
+									className="p-3 bg-dark rounded-3 my-3"
+									key={data[key].chrome_id + '_' + key}
+								>
+									<strong className="h5 mb-2 d-block feature-title">
+										<a href={data[key].spec} target="_blank" rel="noreferrer">
+											{data[key].title}
+										</a>
 
-									<Stack direction="horizontal" gap={2}>
-										{data[key].categories.map((cat) => (
-											<Badge bg="info" key={data[key].chrome_id + '_' + cat}>
-												{cat}
-											</Badge>
-										))}
-									</Stack>
-								</strong>
-								{data[key].description}
-								<br />
-								{showProgress(
-									checked
-										? data[key].usage_perc_y + data[key].usage_perc_a
-										: data[key].usage_perc_y
-								)}
-								<em className="small">
-									{(checked
-										? data[key].usage_perc_y + data[key].usage_perc_a
-										: data[key].usage_perc_y
-									).toFixed(0)}
-									%
-								</em>
-							</Container>
-						))}
+										<Stack direction="horizontal" gap={2}>
+											{[...new Set(data[key].categories)].map((cat) => (
+												<Badge
+													bg="info"
+													key={data[key].chrome_id + '_' + key + '_' + cat}
+												>
+													{cat}
+												</Badge>
+											))}
+										</Stack>
+									</strong>
+									{data[key].description}
+									<br />
+									{showProgress(
+										checked
+											? data[key].usage_perc_y + data[key].usage_perc_a
+											: data[key].usage_perc_y
+									)}
+									<em className="small">
+										{(checked
+											? data[key].usage_perc_y + data[key].usage_perc_a
+											: data[key].usage_perc_y
+										).toFixed(0)}
+										%
+									</em>
+								</Container>
+							))}
 				</Row>
 			</Container>
 		</>
